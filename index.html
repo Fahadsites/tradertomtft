@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TFT — Trader Tom | The GAS Strategy</title>
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABbElEQVR4nO2bsUoDQRRF3zw1sUln5Yf4CfaWtlZqo71fIRYWgmBlbxX/wdbSKhAQtNpmg0isIsvsToyaeHDmnm5nBua+Mw8Wht1gCTYH29PU3H+krsaha7w1mFvhMbEIbz7kXrxZu0ZPTeRMs1aPB0phVrN/tTB3Qomn36T4DpAAOgCNBNABaCSADkAjAXQAGgmgA9BIAB2ARgLoADQSQAegWV904eT2xKZbg29vEF4q6++fm5lZfX9m5p3X8y16h1fmT89L2XcexXfAr+4E34537X1v5/N57e7BNi6GyfVxB/QPLi2MXle+7zyK7wAJoAPQFC9g4dfgKphcH3WO++PIeqc3f5JBHUBu/tPX4DIpvgMkgA5AIwF0AJriBegLEToAjQTQAWgkgA5AIwF0ABoJoAPQSAAdgEYC6AA0EkAHoJEAOgCNp/6oLIG6Ggd1gFn6v9qcmdXs8UAJNGv11ESuxDUmC87tujx1uB+Cg1dRa55WVgAAAABJRU5ErkJggg==">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -58,10 +59,11 @@
             gap: 8px;
         }
 
-        .header-logo img {
-            height: 36px;
+        .header-logo img, .header-logo svg {
+            height: 38px;
             width: auto;
             display: block;
+            filter: drop-shadow(0 0 8px rgba(0, 200, 150, 0.55)) drop-shadow(0 0 18px rgba(0, 200, 150, 0.25));
         }
 
         .header-cta {
@@ -174,6 +176,155 @@
         }
 
         .cta-btn.pulse { animation: ctaPulse 1.8s ease-in-out; }
+
+        /* ── URGENCY BADGE ── */
+        .urgency-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 80, 80, 0.12);
+            border: 1px solid rgba(255, 80, 80, 0.35);
+            color: #ff6b6b;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 50px;
+            margin-bottom: 16px;
+            letter-spacing: 0.3px;
+        }
+        .urgency-badge .dot {
+            width: 7px;
+            height: 7px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            animation: blink 1.2s ease-in-out infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+        .urgency-line {
+            font-size: 13px;
+            color: rgba(255,255,255,0.55);
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+        .urgency-line strong {
+            color: #00C896;
+        }
+
+        /* ── COUNTDOWN TIMER ── */
+        .countdown-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 10px;
+            background: rgba(255, 160, 0, 0.07);
+            border: 1px solid rgba(255, 160, 0, 0.28);
+            border-radius: 14px;
+            padding: 16px 24px;
+            margin: 0 auto 18px auto;
+            width: 100%;
+            max-width: 420px;
+        }
+        .countdown-label {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #ffb347;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        .countdown-timer {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .countdown-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+        .countdown-digit {
+            font-size: 30px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+            min-width: 42px;
+            text-align: center;
+            background: rgba(255,255,255,0.06);
+            border-radius: 8px;
+            padding: 6px 8px;
+        }
+        .countdown-sep {
+            font-size: 26px;
+            font-weight: 800;
+            color: rgba(255,255,255,0.3);
+            margin-bottom: 14px;
+        }
+        .countdown-unit-label {
+            font-size: 10px;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .countdown-sub {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+        }
+        .countdown-sub strong {
+            color: #ffb347;
+        }
+        /* Strikethrough original price */
+        .price-was {
+            font-size: 22px;
+            color: rgba(255,255,255,0.35);
+            text-decoration: line-through;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+        .price-now-label {
+            display: inline-block;
+            background: rgba(255,160,0,0.15);
+            border: 1px solid rgba(255,160,0,0.3);
+            color: #ffb347;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 50px;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* ── LIVE VIEWERS BADGE ── */
+        .live-viewers {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 200, 150, 0.08);
+            border: 1px solid rgba(0, 200, 150, 0.25);
+            color: rgba(255,255,255,0.75);
+            font-size: 12.5px;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 50px;
+            margin-bottom: 10px;
+            letter-spacing: 0.2px;
+        }
+        .live-viewers .live-dot {
+            width: 7px;
+            height: 7px;
+            background: #00C896;
+            border-radius: 50%;
+            animation: blink 1.4s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+        .live-viewers .viewer-count {
+            color: #00C896;
+            font-weight: 700;
+        }
 
         .cta-note {
             margin-top: 12px;
@@ -756,10 +907,13 @@
             our members use to set trades, walk away, and get funded consistently.
         </p>
         <div class="cta-wrap fade-up delay-3">
+            <div class="live-viewers"><span class="live-dot"></span> <span class="viewer-count" id="viewer-count-hero">27</span>&nbsp;people viewing this page right now</div>
+            <div class="urgency-badge"><span class="dot"></span> Limited spots — we cap monthly intake to protect quality</div>
             <a href="https://www.tft.co.uk/join/payment/eyJpbnRlZ3JhdGlvbkRhdGEiOnsicGxhbklkcyI6WyJkZThjOGMzNC01ZjRkLTQwODItYTY5Yi1mODNlNjFiMTdlYmQiXX0sInBsYW5JZCI6ImRlOGM4YzM0LTVmNGQtNDA4Mi1hNjliLWY4M2U2MWIxN2ViZCJ9" class="cta-btn" id="hero-cta">
                 Join TFT Now — £70/Month
             </a>
             <p class="cta-note">Takes 2 minutes — pay £70/month. Cancel any time.</p>
+            <p class="urgency-line">🗓 <strong>Next live session starts Monday</strong> — join today and start from day 1</p>
         </div>
     </div>
 </section>
@@ -942,10 +1096,24 @@
 <div class="cta-strip fade-up">
     <div class="container">
         <div class="cta-wrap">
+            <div class="live-viewers"><span class="live-dot"></span> <span class="viewer-count" id="viewer-count-proof">27</span>&nbsp;people viewing this page right now</div>
+            <div class="urgency-badge"><span class="dot"></span> Spots filling up — limited intake this month</div>
+            <div class="countdown-wrap">
+                <div class="countdown-label">⏱ Discount expires in</div>
+                <div class="countdown-timer">
+                    <div class="countdown-unit"><span class="countdown-digit" id="cd-h-proof">23</span><span class="countdown-unit-label">hrs</span></div>
+                    <span class="countdown-sep">:</span>
+                    <div class="countdown-unit"><span class="countdown-digit" id="cd-m-proof">59</span><span class="countdown-unit-label">min</span></div>
+                    <span class="countdown-sep">:</span>
+                    <div class="countdown-unit"><span class="countdown-digit" id="cd-s-proof">59</span><span class="countdown-unit-label">sec</span></div>
+                </div>
+                <div class="countdown-sub">Price goes back to <strong>£100/mo</strong> when timer hits zero</div>
+            </div>
             <a href="https://www.tft.co.uk/join/payment/eyJpbnRlZ3JhdGlvbkRhdGEiOnsicGxhbklkcyI6WyJkZThjOGMzNC01ZjRkLTQwODItYTY5Yi1mODNlNjFiMTdlYmQiXX0sInBsYW5JZCI6ImRlOGM4YzM0LTVmNGQtNDA4Mi1hNjliLWY4M2U2MWIxN2ViZCJ9" class="cta-btn" id="proof-cta">
-                Get Inside TFT — £70/month
+                Get Inside TFT — <s style="opacity:0.5;font-weight:400;">£100</s> £70/mo While Offer Lasts
             </a>
             <p class="cta-note">Join 1,000+ traders already inside. Cancel any time.</p>
+            <p class="urgency-line">🗓 <strong>Next live session starts Monday</strong> — join today and start from day 1</p>
         </div>
     </div>
 </div>
@@ -1055,7 +1223,9 @@
 
         <div class="price-reveal-box fade-up delay-2">
             <div class="price-reveal-eyebrow">Your price inside TFT</div>
-            <div>
+            <div class="price-now-label">🔥 Limited-time offer — 24hrs only</div>
+            <div style="display:flex;align-items:baseline;gap:6px;justify-content:center;">
+                <span class="price-was">£100</span>
                 <span class="price-reveal-big">£70</span>
                 <span class="price-reveal-suffix">/mo</span>
             </div>
@@ -1064,10 +1234,24 @@
         </div>
 
         <div class="cta-wrap fade-up delay-3">
+            <div class="live-viewers"><span class="live-dot"></span> <span class="viewer-count" id="viewer-count-pricing">27</span>&nbsp;people viewing this page right now</div>
+            <div class="urgency-badge"><span class="dot"></span> Limited spots — we cap monthly intake to protect quality</div>
+            <div class="countdown-wrap">
+                <div class="countdown-label">⏱ Discount expires in</div>
+                <div class="countdown-timer">
+                    <div class="countdown-unit"><span class="countdown-digit" id="cd-h-pricing">23</span><span class="countdown-unit-label">hrs</span></div>
+                    <span class="countdown-sep">:</span>
+                    <div class="countdown-unit"><span class="countdown-digit" id="cd-m-pricing">59</span><span class="countdown-unit-label">min</span></div>
+                    <span class="countdown-sep">:</span>
+                    <div class="countdown-unit"><span class="countdown-digit" id="cd-s-pricing">59</span><span class="countdown-unit-label">sec</span></div>
+                </div>
+                <div class="countdown-sub">Price goes back to <strong>£100/mo</strong> when timer hits zero</div>
+            </div>
             <a href="https://www.tft.co.uk/join/payment/eyJpbnRlZ3JhdGlvbkRhdGEiOnsicGxhbklkcyI6WyJkZThjOGMzNC01ZjRkLTQwODItYTY5Yi1mODNlNjFiMTdlYmQiXX0sInBsYW5JZCI6ImRlOGM4YzM0LTVmNGQtNDA4Mi1hNjliLWY4M2U2MWIxN2ViZCJ9" class="cta-btn" id="pricing-cta">
-                Get Access Now — £70/Month
+                Get Access Now — <s style="opacity:0.5;font-weight:400;">£100</s> £70/mo While Offer Lasts
             </a>
             <p class="cta-note">Cancel anytime · No contracts · Instant access</p>
+            <p class="urgency-line">🗓 <strong>Next live session starts Monday</strong> — join today and start from day 1</p>
         </div>
     </div>
 </section>
@@ -1166,10 +1350,24 @@
         <h2 class="fade-up">Ready to start trading with structure?</h2>
         <p class="fade-up delay-1">Join over 1,000 traders using the GAS system. Real results happening every single week.</p>
         <div class="cta-wrap fade-up delay-2">
+            <div class="live-viewers"><span class="live-dot"></span> <span class="viewer-count" id="viewer-count-footer">27</span>&nbsp;people viewing this page right now</div>
+            <div class="urgency-badge"><span class="dot"></span> Limited spots — we cap monthly intake to protect quality</div>
+            <div class="countdown-wrap">
+                <div class="countdown-label">⏱ Discount expires in</div>
+                <div class="countdown-timer">
+                    <div class="countdown-unit"><span class="countdown-digit" id="cd-h-footer">23</span><span class="countdown-unit-label">hrs</span></div>
+                    <span class="countdown-sep">:</span>
+                    <div class="countdown-unit"><span class="countdown-digit" id="cd-m-footer">59</span><span class="countdown-unit-label">min</span></div>
+                    <span class="countdown-sep">:</span>
+                    <div class="countdown-unit"><span class="countdown-digit" id="cd-s-footer">59</span><span class="countdown-unit-label">sec</span></div>
+                </div>
+                <div class="countdown-sub">Price goes back to <strong>£100/mo</strong> when timer hits zero</div>
+            </div>
             <a href="https://www.tft.co.uk/join/payment/eyJpbnRlZ3JhdGlvbkRhdGEiOnsicGxhbklkcyI6WyJkZThjOGMzNC01ZjRkLTQwODItYTY5Yi1mODNlNjFiMTdlYmQiXX0sInBsYW5JZCI6ImRlOGM4YzM0LTVmNGQtNDA4Mi1hNjliLWY4M2U2MWIxN2ViZCJ9" class="cta-btn" id="footer-cta">
-                Join TFT Now — £70/Month
+                Join TFT Now — <s style="opacity:0.5;font-weight:400;">£100</s> £70/mo While Offer Lasts
             </a>
             <p class="cta-note">Takes 2 minutes — pay £70/month. Cancel any time.</p>
+            <p class="urgency-line">🗓 <strong>Next live session starts Monday</strong> — join today and start from day 1</p>
         </div>
     </div>
 </section>
@@ -1331,6 +1529,79 @@
         iframe.className = 'obj-video-iframe';
         videoDiv.appendChild(iframe);
     }
+
+    // ── COUNTDOWN TIMER (random 25min–8hr from first visit, persists in localStorage) ──
+    (function() {
+        const KEY = 'tft_offer_expiry';
+
+        // Random duration: anywhere between 25 minutes and 8 hours (in ms)
+        function randomDuration() {
+            const minMs = 25 * 60 * 1000;        // 25 minutes
+            const maxMs = 8 * 60 * 60 * 1000;    // 8 hours
+            return minMs + Math.random() * (maxMs - minMs);
+        }
+
+        let expiry = parseInt(localStorage.getItem(KEY));
+        if (!expiry || isNaN(expiry)) {
+            expiry = Date.now() + randomDuration();
+            localStorage.setItem(KEY, expiry);
+        }
+
+        const sections = ['proof', 'pricing', 'footer']; // hero removed
+
+        function pad(n) { return String(n).padStart(2, '0'); }
+
+        function updateAll() {
+            const remaining = Math.max(0, expiry - Date.now());
+            const h = Math.floor(remaining / 3600000);
+            const m = Math.floor((remaining % 3600000) / 60000);
+            const s = Math.floor((remaining % 60000) / 1000);
+            sections.forEach(id => {
+                const eh = document.getElementById('cd-h-' + id);
+                const em = document.getElementById('cd-m-' + id);
+                const es = document.getElementById('cd-s-' + id);
+                if (eh) eh.textContent = pad(h);
+                if (em) em.textContent = pad(m);
+                if (es) es.textContent = pad(s);
+            });
+            if (remaining <= 0) {
+                // Reset with another random window so it never fully expires
+                expiry = Date.now() + randomDuration();
+                localStorage.setItem(KEY, expiry);
+            }
+        }
+
+        updateAll();
+        setInterval(updateAll, 1000);
+    })();
+
+    // ── LIVE VIEWER COUNT ──
+    (function() {
+        const ids = ['viewer-count-hero', 'viewer-count-proof', 'viewer-count-pricing', 'viewer-count-footer'];
+        // Start at a random number between 18 and 44
+        let current = Math.floor(Math.random() * 27) + 18;
+
+        function setAll(n) {
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = n;
+            });
+        }
+
+        setAll(current);
+
+        function nudge() {
+            // Drift by -3 to +3, but stay within 8–50
+            const delta = Math.floor(Math.random() * 7) - 3;
+            current = Math.min(50, Math.max(8, current + delta));
+            setAll(current);
+            // Schedule next update between 8 and 18 seconds
+            setTimeout(nudge, 8000 + Math.random() * 10000);
+        }
+
+        // First update after 10–20 seconds
+        setTimeout(nudge, 10000 + Math.random() * 10000);
+    })();
 </script>
 </body>
 </html>
