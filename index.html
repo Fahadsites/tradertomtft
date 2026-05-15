@@ -388,6 +388,54 @@
             border: none;
         }
 
+        /* ── VSL PLAY OVERLAY ── */
+        .vsl-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            cursor: pointer;
+            background: linear-gradient(135deg, rgba(8,13,26,0.82) 0%, rgba(13,21,38,0.78) 100%);
+            transition: background 0.2s;
+        }
+        .vsl-overlay:hover { background: linear-gradient(135deg, rgba(8,13,26,0.72) 0%, rgba(13,21,38,0.68) 100%); }
+        .vsl-play-circle {
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #000;
+            padding-left: 6px;
+            box-shadow: 0 0 0 0 rgba(0,200,150,0.5);
+            animation: vslPulseRing 2s ease-in-out infinite;
+            transition: transform 0.2s;
+        }
+        .vsl-overlay:hover .vsl-play-circle { transform: scale(1.1); }
+        @keyframes vslPulseRing {
+            0%   { box-shadow: 0 0 0 0 rgba(0,200,150,0.55); }
+            70%  { box-shadow: 0 0 0 20px rgba(0,200,150,0); }
+            100% { box-shadow: 0 0 0 0 rgba(0,200,150,0); }
+        }
+        .vsl-play-label {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.2px;
+            text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+        }
+        .vsl-play-sub {
+            font-size: 12px;
+            color: rgba(255,255,255,0.55);
+            margin-top: -10px;
+        }
+
         /* ═══════════════════════════ PROOF BAR ═══════════════════════════ */
         .proof-bar {
             background: var(--bg-secondary);
@@ -594,7 +642,7 @@
         .pricing-name { flex: 1; font-size: 15px; font-weight: 500; }
         .pricing-name-sub { font-size: 12px; color: var(--accent); margin-top: 3px; }
 
-        .pricing-price {
+        .pricing-price { display: none; /* value stack removed */
             font-size: 15px;
             font-weight: 700;
             color: var(--text-secondary);
@@ -796,6 +844,25 @@
 
         /* lightbox removed — FAQ videos now play inline */
 
+        /* ── GUARANTEE BADGE ── */
+        .guarantee-badge {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: rgba(0,200,150,0.05);
+            border: 1px solid rgba(0,200,150,0.2);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin: 14px auto 8px;
+            max-width: 460px;
+            text-align: left;
+            font-size: 13.5px;
+            color: #CBD5E1;
+            line-height: 1.5;
+        }
+        .guarantee-badge strong { color: #fff; display: block; margin-bottom: 3px; font-size: 14px; }
+        .guarantee-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+
         /* ═══════════════════════════ FOOTER CTA ═══════════════════════════ */
         .footer-cta {
             background: var(--bg-secondary);
@@ -898,12 +965,12 @@
     <div class="container">
         <div class="tag fade-up">🇬🇧 UK Trading Community · 1,000+ Traders</div>
         <h1 class="fade-up delay-1">
-            How UK Traders Are Getting Funded
-            <span class="highlight">Without Watching Charts All Day</span>
+            The UK Community That's Helped
+            <span class="highlight">1,000+ Traders Get Funded</span>
         </h1>
         <p class="sub fade-up delay-2">
-            Watch the free breakdown below and see the system our members use
-            to set trades, walk away and get funded consistently.
+            Five mentors. Six live sessions a week. One proven system.<br>
+            Watch the free breakdown to see exactly how it works.
         </p>
     </div>
 </section>
@@ -913,10 +980,15 @@
 ════════════════════════════════ -->
 <section class="video-section">
     <div class="container">
-        <div class="video-outer fade-up">
+        <div class="video-outer fade-up" id="vsl-wrap">
+            <div class="vsl-overlay" id="vsl-overlay" onclick="launchVSL()">
+                <div class="vsl-play-circle">▶</div>
+                <div class="vsl-play-label">▸ Watch This Before You Scroll (2 mins)</div>
+                <div class="vsl-play-sub">Free breakdown · no opt-in required</div>
+            </div>
             <iframe
                 id="vsl-player"
-                src="https://player.vimeo.com/video/1187281276?color=00C896&badge=0&autopause=0&portrait=0&byline=0&title=0&autoplay=1&muted=1&player_id=vsl-player&app_id=58479"
+                src="https://player.vimeo.com/video/1187281276?color=00C896&badge=0&autopause=0&portrait=0&byline=0&title=0&player_id=vsl-player&app_id=58479"
                 frameborder="0"
                 allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
                 referrerpolicy="strict-origin-when-cross-origin"
@@ -926,11 +998,11 @@
         </div>
         <div class="cta-wrap fade-up" style="margin-top:32px;">
             <div class="live-viewers"><span class="live-dot"></span> <span class="viewer-count" id="viewer-count-hero">27</span>&nbsp;people viewing this page right now</div>
-            <div class="urgency-badge"><span class="dot"></span> Limited spots · we cap monthly intake to protect quality</div>
+            <div class="urgency-badge"><span class="dot"></span> New intakes open twice a month — spots fill fast</div>
             <a href="https://www.tft.co.uk/join/payment/eyJpbnRlZ3JhdGlvbkRhdGEiOnsicGxhbklkcyI6WyJkZThjOGMzNC01ZjRkLTQwODItYTY5Yi1mODNlNjFiMTdlYmQiXX0sInBsYW5JZCI6ImRlOGM4YzM0LTVmNGQtNDA4Mi1hNjliLWY4M2U2MWIxN2ViZCJ9" class="cta-btn" id="hero-cta">
                 Join TFT Now · £70/Month
             </a>
-            <p class="cta-note">Takes 2 minutes. Pay £70/month. Cancel any time.</p>
+            <p class="cta-note">Takes 2 minutes. Cancel any time.</p>
             <p class="urgency-line">🗓 <strong>Next live session starts Monday.</strong> Join today and start from day 1.</p>
         </div>
     </div>
@@ -1170,30 +1242,50 @@
 </section>
 
 <!-- ════════════════════════════════
+     GAS STRATEGY DEMO VIDEO
+════════════════════════════════ -->
+<section>
+    <div class="container">
+        <span class="eyebrow fade-up">See it in action</span>
+        <span class="eyebrow-line fade-up"></span>
+        <h2 class="section-title fade-up">Here's Exactly How the <span class="hl">GAS Strategy Works</span></h2>
+        <p class="section-subtitle fade-up delay-1">Tom walks you through a live setup in under 2 minutes. Entry, stop loss, take profit — exactly how members trade every day.</p>
+        <div class="video-outer fade-up delay-2" style="max-width:720px;margin:0 auto;">
+            <iframe
+                src="https://www.loom.com/embed/92aa81fd2b2047e0900b30c4335248a7?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true"
+                frameborder="0"
+                webkitallowfullscreen
+                mozallowfullscreen
+                allowfullscreen
+                title="How the GAS Strategy Works">
+            </iframe>
+        </div>
+        <p style="text-align:center;margin-top:18px;font-size:13px;color:var(--text-secondary);">This is what you learn inside TFT — applied to every major pair, gold, and US indices.</p>
+    </div>
+</section>
+
+<!-- ════════════════════════════════
      PRICING
 ════════════════════════════════ -->
 <section class="pricing-section">
     <div class="container">
-        <span class="eyebrow fade-up">What you're actually getting</span>
+        <span class="eyebrow fade-up">Everything included</span>
         <span class="eyebrow-line fade-up"></span>
-        <h2 class="section-title fade-up">Everything You'd Pay For Separately… <span class="hl">In One Place</span></h2>
-        <p class="section-subtitle fade-up delay-1">If you sourced every element of TFT individually, here's what it would cost you every single month.</p>
+        <h2 class="section-title fade-up">One Price. <span class="hl">Everything You Need.</span></h2>
+        <p class="section-subtitle fade-up delay-1">No upsells. No hidden extras. Everything below is included from day one.</p>
 
         <div class="pricing-list fade-up delay-1">
             <div class="pricing-row">
                 <div class="pricing-check">✓</div>
                 <div class="pricing-name">GAS Strategy + Dedicated Private Mentor</div>
-                <div class="pricing-price">£400/mo</div>
             </div>
             <div class="pricing-row">
                 <div class="pricing-check">✓</div>
                 <div class="pricing-name">5 Experienced Trading Mentors</div>
-                <div class="pricing-price">£250/mo</div>
             </div>
             <div class="pricing-row">
                 <div class="pricing-check">✓</div>
                 <div class="pricing-name">Live Trading Sessions 6 Days a Week</div>
-                <div class="pricing-price">£150/mo</div>
             </div>
             <div class="pricing-row">
                 <div class="pricing-check">✓</div>
@@ -1201,53 +1293,44 @@
                     Alert-Based Indicators (Set &amp; Forget System)
                     <div class="pricing-name-sub">★ One-time add-on · £15 · yours for life as a member</div>
                 </div>
-                <div class="pricing-price">£75/mo</div>
             </div>
             <div class="pricing-row">
                 <div class="pricing-check">✓</div>
                 <div class="pricing-name">Structured Education · Beginner to Advanced</div>
-                <div class="pricing-price">£100/mo</div>
             </div>
             <div class="pricing-row">
                 <div class="pricing-check">✓</div>
                 <div class="pricing-name">Active Discord Community · 1,000+ Traders</div>
-                <div class="pricing-price">£50/mo</div>
             </div>
-        </div>
-
-        <div class="pricing-total fade-up delay-2">
-            <span class="pricing-total-label">Total Standalone Value</span>
-            <span class="pricing-total-value">£1,025/month</span>
         </div>
 
         <div class="price-reveal-box fade-up delay-2">
             <div class="price-reveal-eyebrow">Your price inside TFT</div>
-            <div class="price-now-label">🔥 Limited-time offer · 24hrs only</div>
+            <div class="price-now-label">🔒 Member Rate · Cancel Anytime</div>
             <div style="display:flex;align-items:baseline;gap:6px;justify-content:center;">
                 <span class="price-was">£100</span>
                 <span class="price-reveal-big">£70</span>
                 <span class="price-reveal-suffix">/mo</span>
             </div>
             <p class="price-reveal-desc">Everything above. One community. One price.<br>Less than a single losing trade.</p>
-            <div class="savings-badge">You save £955 every month</div>
         </div>
 
         <div class="cta-wrap fade-up delay-3">
             <div class="live-viewers"><span class="live-dot"></span> <span class="viewer-count" id="viewer-count-pricing">27</span>&nbsp;people viewing this page right now</div>
-            <div class="urgency-badge"><span class="dot"></span> Limited spots · we cap monthly intake to protect quality</div>
+            <div class="urgency-badge"><span class="dot"></span> New intakes open twice a month — spots fill fast</div>
             <div class="countdown-wrap">
                 <div class="countdown-label">⏱ Discount expires in</div>
                 <div class="countdown-timer">
-                    <div class="countdown-unit"><span class="countdown-digit" id="cd-h-pricing">23</span><span class="countdown-unit-label">hrs</span></div>
+                    <div class="countdown-unit"><span class="countdown-digit" id="cd-h-pricing">--</span><span class="countdown-unit-label">hrs</span></div>
                     <span class="countdown-sep">:</span>
-                    <div class="countdown-unit"><span class="countdown-digit" id="cd-m-pricing">59</span><span class="countdown-unit-label">min</span></div>
+                    <div class="countdown-unit"><span class="countdown-digit" id="cd-m-pricing">--</span><span class="countdown-unit-label">min</span></div>
                     <span class="countdown-sep">:</span>
-                    <div class="countdown-unit"><span class="countdown-digit" id="cd-s-pricing">59</span><span class="countdown-unit-label">sec</span></div>
+                    <div class="countdown-unit"><span class="countdown-digit" id="cd-s-pricing">--</span><span class="countdown-unit-label">sec</span></div>
                 </div>
                 <div class="countdown-sub">Price goes back to <strong>£100/mo</strong> when timer hits zero</div>
             </div>
             <a href="https://www.tft.co.uk/join/payment/eyJpbnRlZ3JhdGlvbkRhdGEiOnsicGxhbklkcyI6WyJkZThjOGMzNC01ZjRkLTQwODItYTY5Yi1mODNlNjFiMTdlYmQiXX0sInBsYW5JZCI6ImRlOGM4YzM0LTVmNGQtNDA4Mi1hNjliLWY4M2U2MWIxN2ViZCJ9" class="cta-btn" id="pricing-cta">
-                Get Access Now · <s style="opacity:0.5;font-weight:400;">£100</s> £70/mo While Offer Lasts
+                Get Access Now · £70/Month
             </a>
             <p class="cta-note">Cancel anytime · No contracts · Instant access</p>
             <p class="urgency-line">🗓 <strong>Next live session starts Monday.</strong> Join today and start from day 1.</p>
@@ -1350,22 +1433,22 @@
         <p class="fade-up delay-1">Join over 1,000 traders using the GAS system. Real results happening every single week.</p>
         <div class="cta-wrap fade-up delay-2">
             <div class="live-viewers"><span class="live-dot"></span> <span class="viewer-count" id="viewer-count-footer">27</span>&nbsp;people viewing this page right now</div>
-            <div class="urgency-badge"><span class="dot"></span> Limited spots · we cap monthly intake to protect quality</div>
+            <div class="urgency-badge"><span class="dot"></span> New intakes open twice a month — spots fill fast</div>
             <div class="countdown-wrap">
                 <div class="countdown-label">⏱ Discount expires in</div>
                 <div class="countdown-timer">
-                    <div class="countdown-unit"><span class="countdown-digit" id="cd-h-footer">23</span><span class="countdown-unit-label">hrs</span></div>
+                    <div class="countdown-unit"><span class="countdown-digit" id="cd-h-footer">--</span><span class="countdown-unit-label">hrs</span></div>
                     <span class="countdown-sep">:</span>
-                    <div class="countdown-unit"><span class="countdown-digit" id="cd-m-footer">59</span><span class="countdown-unit-label">min</span></div>
+                    <div class="countdown-unit"><span class="countdown-digit" id="cd-m-footer">--</span><span class="countdown-unit-label">min</span></div>
                     <span class="countdown-sep">:</span>
-                    <div class="countdown-unit"><span class="countdown-digit" id="cd-s-footer">59</span><span class="countdown-unit-label">sec</span></div>
+                    <div class="countdown-unit"><span class="countdown-digit" id="cd-s-footer">--</span><span class="countdown-unit-label">sec</span></div>
                 </div>
                 <div class="countdown-sub">Price goes back to <strong>£100/mo</strong> when timer hits zero</div>
             </div>
             <a href="https://www.tft.co.uk/join/payment/eyJpbnRlZ3JhdGlvbkRhdGEiOnsicGxhbklkcyI6WyJkZThjOGMzNC01ZjRkLTQwODItYTY5Yi1mODNlNjFiMTdlYmQiXX0sInBsYW5JZCI6ImRlOGM4YzM0LTVmNGQtNDA4Mi1hNjliLWY4M2U2MWIxN2ViZCJ9" class="cta-btn" id="footer-cta">
-                Join TFT Now · <s style="opacity:0.5;font-weight:400;">£100</s> £70/mo While Offer Lasts
+                Join TFT Now · £70/Month
             </a>
-            <p class="cta-note">Takes 2 minutes · pay £70/month. Cancel any time.</p>
+            <p class="cta-note">Takes 2 minutes. Cancel any time.</p>
             <p class="urgency-line">🗓 <strong>Next live session starts Monday.</strong> Join today and start from day 1.</p>
         </div>
     </div>
@@ -1428,25 +1511,20 @@
 
     document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
 
-    // ── VSL PLAYER: unmute → restart from 0 ──
-    const vslIframe = document.getElementById('vsl-player');
-    if (vslIframe) {
+    // ── VSL PLAY OVERLAY ──
+    function launchVSL() {
+        const overlay = document.getElementById('vsl-overlay');
+        const iframe = document.getElementById('vsl-player');
+        if (!overlay || !iframe) return;
+        overlay.style.display = 'none';
+        // Inject autoplay=1 into src now that user has clicked
+        const src = iframe.src;
+        iframe.src = src + '&autoplay=1';
+
+        // CTA pulse after 8s of watching (using Vimeo player API if available)
         try {
-            const vslPlayer = new Vimeo.Player(vslIframe);
-            let vslAutoMuted = true;
+            const vslPlayer = new Vimeo.Player(iframe);
             let vslPulsed = false;
-
-            // When user unmutes the autoplay-muted video, restart from 0
-            vslPlayer.on('volumechange', function(data) {
-                if (vslAutoMuted && data.volume > 0) {
-                    vslAutoMuted = false;
-                    vslPlayer.setCurrentTime(0).then(function() {
-                        vslPlayer.play();
-                    });
-                }
-            });
-
-            // CTA pulse after 8s of watching
             vslPlayer.on('timeupdate', function(data) {
                 if (data.seconds >= 8 && !vslPulsed) {
                     vslPulsed = true;
@@ -1529,24 +1607,15 @@
         videoDiv.appendChild(iframe);
     }
 
-    // ── COUNTDOWN TIMER (random 25min–8hr from first visit, persists in localStorage) ──
+    // ── COUNTDOWN TIMER (random 2–10 hrs, new random each page visit) ──
     (function() {
-        const KEY = 'tft_offer_expiry';
+        // Always generate a fresh random duration on each page load (no localStorage persistence)
+        // Range: 2 hours to 10 hours
+        const minMs = 2 * 60 * 60 * 1000;
+        const maxMs = 10 * 60 * 60 * 1000;
+        let expiry = Date.now() + minMs + Math.random() * (maxMs - minMs);
 
-        // Random duration: anywhere between 25 minutes and 8 hours (in ms)
-        function randomDuration() {
-            const minMs = 25 * 60 * 1000;        // 25 minutes
-            const maxMs = 8 * 60 * 60 * 1000;    // 8 hours
-            return minMs + Math.random() * (maxMs - minMs);
-        }
-
-        let expiry = parseInt(localStorage.getItem(KEY));
-        if (!expiry || isNaN(expiry)) {
-            expiry = Date.now() + randomDuration();
-            localStorage.setItem(KEY, expiry);
-        }
-
-        const sections = ['proof', 'pricing', 'footer']; // hero removed
+        const sections = ['proof', 'pricing', 'footer'];
 
         function pad(n) { return String(n).padStart(2, '0'); }
 
@@ -1564,9 +1633,8 @@
                 if (es) es.textContent = pad(s);
             });
             if (remaining <= 0) {
-                // Reset with another random window so it never fully expires
-                expiry = Date.now() + randomDuration();
-                localStorage.setItem(KEY, expiry);
+                // Reset with a new random window when expired
+                expiry = Date.now() + minMs + Math.random() * (maxMs - minMs);
             }
         }
 
